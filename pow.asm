@@ -37,7 +37,7 @@ main:
 
 	#print "enter" for n value
     li $v0 4
-    la $a0 promptX
+    la $a0 promptN
     syscall
 
     #get input from command line and store in $t1
