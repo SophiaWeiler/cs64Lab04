@@ -213,6 +213,15 @@ doSwap:
         #load the array into an address
         la $t6 myArray
 
+        #move the pointer over so it starts at the right position
+        addiu $t6 $t6 4
+
+        #load the array into an address
+        la $t5 myArray 
+
+        #move the pointer so that it points to the end
+        addiu $t5 $t5 44
+
         # load 1 into $t0 --> same as x = 1
         li $t0 1
 
@@ -230,19 +239,22 @@ doSwap:
                 #load the value at address[x] into temp register
                 lw $t7 0($t6)
 
-                #load the value at addres[y] into temp register
+                #load the value at address[y] into temp register
                 #THIS IS NOT RIGHT PLEASE UPDATE!!!!!!!!!!!!!
-                lw $t4 0($t6)
+                lw $t4 0($t5)
                 
                 #store the value at y in x
                 sw $t4 0($t6)
 
                 #store temp value in y value location
                 #THIS IS NOT RIGHT PLEASE CHECK!!!!!
-                sw $t7 0($t6)
+                sw $t7 0($t5)
 
-                #change the pointer to the address by 8 bytes 
+                #change the pointer to the x address by 8 bytes 
                 addiu $t6 $t6 8
+
+                #change the pointer to the y address by -8 bytes 
+                addiu $t5 $t5 -8
 
                 #increase $t0 (x) by 2
                 addi $t0 2
@@ -260,7 +272,7 @@ doSwap:
                 #$t4 --> temp y value
                 #$t5 --> y pointer
                 #$t6 --> array pointer
-                #$t7 --> temp value
+                #$t7 --> temp x value
 
 
         loopexit:
